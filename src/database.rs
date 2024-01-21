@@ -11,3 +11,13 @@ pub fn establish_connection() -> MysqlConnection {
     MysqlConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
+
+pub fn update_server_value_by_id(s_id: i32, new_value: bool) {
+    let connection = &mut establish_connection();
+    use crate::schema::servers::dsl::*;
+
+    let _result = diesel::update(servers)
+        .filter(server_id.eq(s_id))
+        .set(server_available.eq(new_value))
+        .execute(connection);
+}

@@ -2,7 +2,7 @@ use crate::schema::*;
 use diesel::prelude::*;
 use rocket::serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Queryable)]
+#[derive(Serialize, Queryable, Debug)]
 #[serde(crate = "rocket::serde")]
 pub struct Server {
     pub server_id: i32,
